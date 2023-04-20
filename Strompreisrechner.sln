@@ -4,6 +4,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinnD.Strompreisrechner.Api
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinnD.Strompreisrechner.IntegrationTests", "FinnD.Strompreisrechner.IntegrationTests\FinnD.Strompreisrechner.IntegrationTests.csproj", "{716325FE-DB20-4FB2-8AA4-4435741BF2F4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A7308A83-45E3-45D3-9A34-09FEF146FADB}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

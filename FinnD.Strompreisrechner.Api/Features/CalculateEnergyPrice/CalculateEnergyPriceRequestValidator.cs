@@ -9,7 +9,7 @@ public sealed class CalculateEnergyPriceRequestValidator : AbstractValidator<Cal
         RuleFor(x => x.KwhConsumptionPerYear)
             .GreaterThan(0)
             .WithMessage("KWh consumption per year must be greater than 0");
-        RuleFor(x => x.PricePerKwh)
+        RuleFor(x => x.PricePerKwhInEuro)
             .GreaterThan(0)
             .WithMessage("Price per kWh must be greater than 0");
     }

@@ -24,14 +24,14 @@ public class CalculateTests
     {
         HttpResponseMessage result = await _client.PostAsJsonAsync("/calculate", new CalculateEnergyPriceRequest
         {
-            PricePerKwh = pricePerKwh,
+            PricePerKwhInEuro = pricePerKwh,
             KwhConsumptionPerYear = kwhConsumptionPerYear
         });
 
         var response = await result.Content.ReadFromJsonAsync<CalculateEnergyPricesResponse>();
 
         Assert.Equal(HttpStatusCode.OK, result.StatusCode);
-        Assert.Equal(expectedPricePerYear, response?.PricePerYear);
+        Assert.Equal(expectedPricePerYear, response?.PricePerYearInEuro);
     }
 
     [Theory]
@@ -44,7 +44,7 @@ public class CalculateTests
     {
         HttpResponseMessage result = await _client.PostAsJsonAsync("/calculate", new CalculateEnergyPriceRequest
         {
-            PricePerKwh = pricePerKwh,
+            PricePerKwhInEuro = pricePerKwh,
             KwhConsumptionPerYear = kwhConsumptionPerYear
         });
 

@@ -4,13 +4,13 @@ public sealed class HistoryEntry
 {
     public Guid Id { get; set; }
     public decimal KwhConsumptionPerYear { get; set; }
-    public decimal PricePerKwh { get; set; }
+    public decimal PricePerKwhInEuro { get; set; }
 
-    public decimal PricePerYear { get; set; }
-    public decimal PricePerMonth => PricePerYear / 12;
-    public decimal PricePerDay => PricePerYear / 365;
-    public decimal PricePerHour => PricePerDay / 24;
-    public decimal PricePerMinute => PricePerHour / 60;
+    public decimal PricePerYearInEuro { get; set; }
+    public decimal PricePerMonthInEuro => PricePerYearInEuro / 12;
+    public decimal PricePerDayInEuro => PricePerYearInEuro / 365;
+    public decimal PricePerHourInEuro => PricePerDayInEuro / 24;
+    public decimal PricePerMinuteInEuro => PricePerHourInEuro / 60;
 
     public DateTime CreatedAt { get; set; }
 }

@@ -2,9 +2,9 @@
 
 public sealed record CalculateEnergyPricesResponse
 {
-    public required decimal PricePerYear { get; init; }
-    public required decimal PricePerMonth { get; init; }
-    public required decimal PricePerDay { get; init; }
-    public required decimal PricePerHour { get; init; }
-    public required decimal PricePerMinute { get; init; }
+    public required decimal PricePerYearInEuro { get; init; }
+    public required decimal PricePerMonthInEuro { get; init; }
+    public required decimal PricePerDayInEuro { get; init; }
+    public required decimal PricePerHourInEuro { get; init; }
+    public required decimal PricePerMinuteInEuro { get; init; }
 }

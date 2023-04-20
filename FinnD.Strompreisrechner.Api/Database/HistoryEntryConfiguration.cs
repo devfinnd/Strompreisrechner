@@ -11,8 +11,8 @@ public sealed class HistoryEntryConfiguration : IEntityTypeConfiguration<History
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).HasColumnName("id").IsRequired();
         builder.Property(x => x.KwhConsumptionPerYear).HasColumnName("kwh_per_year").IsRequired();
-        builder.Property(x => x.PricePerKwh).HasColumnName("price_per_kwh").IsRequired();
-        builder.Property(x => x.PricePerYear).HasColumnName("price_per_year").IsRequired();
+        builder.Property(x => x.PricePerKwhInEuro).HasColumnName("price_per_kwh").IsRequired();
+        builder.Property(x => x.PricePerYearInEuro).HasColumnName("price_per_year").IsRequired();
         builder.Property(x => x.CreatedAt).HasColumnName("created_at").IsRequired()
             .HasDefaultValueSql("datetime('now')");
     }

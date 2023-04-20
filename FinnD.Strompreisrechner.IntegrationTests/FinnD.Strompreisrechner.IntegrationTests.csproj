@@ -28,8 +28,4 @@
       <ProjectReference Include="..\FinnD.Strompreisrechner.Api\FinnD.Strompreisrechner.Api.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Tests\" />
-    </ItemGroup>
-
 </Project>

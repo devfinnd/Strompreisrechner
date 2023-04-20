@@ -25,8 +25,8 @@ public static class Endpoints
         {
             Id = Guid.NewGuid(),
             KwhConsumptionPerYear = request.KwhConsumptionPerYear,
-            PricePerKwh = request.PricePerKwh,
-            PricePerYear = request.KwhConsumptionPerYear * request.PricePerKwh,
+            PricePerKwhInEuro = request.PricePerKwhInEuro,
+            PricePerYearInEuro = request.KwhConsumptionPerYear * request.PricePerKwhInEuro,
         };
 
         dbContext.History.Add(historyEntry);
@@ -35,11 +35,11 @@ public static class Endpoints
 
         return Results.Ok(new CalculateEnergyPricesResponse
         {
-            PricePerYear = historyEntry.PricePerYear,
-            PricePerMonth = historyEntry.PricePerMonth,
-            PricePerDay = historyEntry.PricePerDay,
-            PricePerHour = historyEntry.PricePerHour,
-            PricePerMinute = historyEntry.PricePerMinute,
+            PricePerYearInEuro = historyEntry.PricePerYearInEuro,
+            PricePerMonthInEuro = historyEntry.PricePerMonthInEuro,
+            PricePerDayInEuro = historyEntry.PricePerDayInEuro,
+            PricePerHourInEuro = historyEntry.PricePerHourInEuro,
+            PricePerMinuteInEuro = historyEntry.PricePerMinuteInEuro,
         });
     }
 
@@ -70,7 +70,7 @@ public static class Endpoints
             TotalPages = (int)Math.Ceiling(totalCount / (double)request.PageSize),
             Entries = result,
             HasNextPage = request.Page + 1 < (int)Math.Ceiling(totalCount / (double)request.PageSize),
-            HasPreviousPage = request.Page > 0
+            HasPreviousPage = request.Page > 1
         });
     }
 }

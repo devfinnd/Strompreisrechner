@@ -1,7 +1,9 @@
-﻿using FinnD.Strompreisrechner.Api;
+﻿using System.Data.Common;
+using FinnD.Strompreisrechner.Api;
 using FinnD.Strompreisrechner.Api.Database;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -33,7 +35,20 @@ public sealed class StrompreisrechnerWebApplicationFactory : WebApplicationFacto
 
             services.Remove(dbContextOptions);
 
-            services.AddDbContext<HistoryDbContext>(opt => opt.UseInMemoryDatabase("TestDb" + Guid.NewGuid()));
+            // Create open SqliteConnection so EF won't automatically close it.
+            services.AddSingleton<DbConnection>(container =>
+            {
+                var connection = new SqliteConnection("DataSource=:memory:");
+                connection.Open();
+
+                return connection;
+            });
+
+            services.AddDbContext<HistoryDbContext>((provider, options) =>
+            {
+                var connection = provider.GetRequiredService<DbConnection>();
+                options.UseSqlite(connection);
+            });
         });
     }
 }

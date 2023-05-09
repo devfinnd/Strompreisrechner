@@ -24,13 +24,13 @@ public class Program
 
         WebApplication app = builder.Build();
 
-        app.MapPost("/calculate", Endpoints.Calculate)
+        app.MapPost("/calculate", CalculateEnergyPriceEndpoint.Handler)
             .Accepts<CalculateEnergyPriceRequest>("application/json")
             .Produces<CalculateEnergyPricesResponse>((int)HttpStatusCode.OK, "application/json")
             .ProducesValidationProblem()
             .ProducesProblem((int)HttpStatusCode.InternalServerError);
 
-        app.MapGet("/history", Endpoints.GetHistory)
+        app.MapGet("/history", GetHistoryEndpoint.Handler)
             .Produces<GetHistoryResponse>()
             .ProducesValidationProblem()
             .ProducesProblem((int)HttpStatusCode.InternalServerError);
@@ -40,7 +40,8 @@ public class Program
 
         using IServiceScope scope = app.Services.CreateScope();
         {
-            await scope.ServiceProvider.GetRequiredService<HistoryDbContext>().Database.EnsureCreatedAsync();
+            var historyDbContext = scope.ServiceProvider.GetRequiredService<HistoryDbContext>();
+            await historyDbContext.Database.MigrateAsync();
         }
 
         await app.RunAsync();

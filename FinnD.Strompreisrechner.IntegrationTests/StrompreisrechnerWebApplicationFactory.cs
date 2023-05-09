@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using Xunit.Abstractions;
 
@@ -29,13 +30,8 @@ public sealed class StrompreisrechnerWebApplicationFactory : WebApplicationFacto
 
         builder.ConfigureServices(services =>
         {
-            ServiceDescriptor? dbContextOptions = services.SingleOrDefault(
-                d => d.ServiceType ==
-                     typeof(DbContextOptions<HistoryDbContext>));
+            services.RemoveAll(typeof(DbContextOptions<HistoryDbContext>));
 
-            services.Remove(dbContextOptions);
-
-            // Create open SqliteConnection so EF won't automatically close it.
             services.AddSingleton<DbConnection>(container =>
             {
                 var connection = new SqliteConnection("DataSource=:memory:");
